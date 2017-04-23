@@ -17,7 +17,7 @@ public class GreetingController {
 	@RequestMapping(value = "/greet/{name}", method = RequestMethod.GET, produces="application/json")
 	public Greeting greeting(@PathVariable("name") String name) {
 		System.out.println("Fetching data " + name);
-		Greeting greet = new Greeting(1, "Service call in " + new SimpleDateFormat("DD-MMM-YYYY HH:MM:SS a").format(Calendar.getInstance().getTime()));
+		Greeting greet = new Greeting(1, "Service call param '" + name + "' in " + new SimpleDateFormat("DD-MMM-YYYY HH:MM:SS a").format(Calendar.getInstance().getTime()));
 //		return new ResponseEntity<Greeting>(greet, HttpStatus.OK);
 		return greet;
 	}
