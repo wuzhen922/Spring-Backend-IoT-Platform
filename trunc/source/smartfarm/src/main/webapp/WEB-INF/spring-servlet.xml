@@ -19,4 +19,6 @@
             <value>.jsp</value>
         </property>
     </bean>
+    <bean id="restOperation" class="org.springframework.web.client.RestTemplate" autowire="byType">
+    </bean>
 </beans>

@@ -1,0 +1,2 @@
+host:port/smartfarm/greet/{variable} : demo GET service, đưa ra giá trị variable
+host:port/smartfarm//weather/{city} : demo GET service, lấy dữ liệu từ weather underground và trả về JSON thô, city là các thành phố lớn của Việt Nam
