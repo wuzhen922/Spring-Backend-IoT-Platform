@@ -1,2 +1,15 @@
-host:port/smartfarm/greet/{variable} : demo GET service, đưa ra giá trị variable
-host:port/smartfarm//weather/{city} : demo GET service, lấy dữ liệu từ weather underground và trả về JSON thô, city là các thành phố lớn của Việt Nam
+host:port/smartfarm/greet/show/{variable} : demo GET service, đưa ra giá trị variable
+host:port/smartfarm/greet/show/all : GET service, đưa ra tất cả dữ liệu trong Mongo Database với host mặc định, database name: iot, collection name: greeting (đang fix cứng trong code, sẽ sửa sau)
+host:port/smartfarm/greet/addContext :
+	POST request
+	content-type : application/json
+	param trong body: {"context" : "${variable}"}
+	insert 1 bản ghi context vào db với id random, context là ${variable}
+	
+host:port/smartfarm/greet/add :
+	POST request
+	content-type : application/json
+	param trong body: parse object 'Greeting' trong code sang json
+	insert 1 bản ghi context vào db với id và context truyền vào
+
+host:port/smartfarm/weather/{city} : demo GET service, lấy dữ liệu từ weather underground và trả về JSON thô, city là các thành phố lớn của Việt Nam
