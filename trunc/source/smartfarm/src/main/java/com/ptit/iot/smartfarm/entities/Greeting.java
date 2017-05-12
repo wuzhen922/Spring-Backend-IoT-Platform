@@ -1,6 +1,8 @@
 package com.ptit.iot.smartfarm.entities;
 
 import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,9 +14,16 @@ public class Greeting implements Serializable {
 	private static final long serialVersionUID = 8031616230239703367L;
 	private long id;
 	private String context;
+	private static AtomicInteger count;
 	
 	public Greeting() {
 		// TODO Auto-generated constructor stub
+		if(count == null) count = new AtomicInteger();
+	}
+	
+	public static int getNextId() {
+		if(count == null) count = new AtomicInteger();
+		return count.incrementAndGet();
 	}
 
 	public Greeting(long id, String context) {

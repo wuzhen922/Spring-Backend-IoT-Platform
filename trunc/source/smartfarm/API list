@@ -13,3 +13,44 @@ host:port/smartfarm/greet/add :
 	insert 1 bản ghi context vào db với id và context truyền vào
 
 host:port/smartfarm/weather/{city} : demo GET service, lấy dữ liệu từ weather underground và trả về JSON thô, city là các thành phố lớn của Việt Nam
+
+Cassandra api:
+
+Điều kiện cần:
+Cài cassandra cluster với các tham số ip và CQL native port như trong file cassandra.properties (port đang để mặc định, ko cần config lại)
+Tạo keyspace có tên trong file cassandra.properties (cql trong file Cassandra_script.sql)
+
+Các service nên dùng với table dùng để test là TB1 (tự tạo với service addTable phía dưới)
+
+host:port/smartfarm/cass/addTable :
+	tạo ra 1 bảng mới với tên truyền vào và cấu trúc mặc định như trên, nếu bảng đã tồn tại rồi thì không tạo nữa.
+	POST request
+	content-type: text
+	param trong body: Tên bảng sẽ tạo
+		Cấu trúc bảng: id int primary key, context string.
+	
+
+host:port/smartfarm/cass/getAll:
+	GET method
+	lấy ra tất cả record trong bảng TB1
+
+
+host:port/smartfarm/cass/addNew :
+	Tạo ra 1 record mới trong bảng TB1 với id tự sinh và context là param truyền vào
+	POST request
+	param: text
+	lưu ý: Nếu id của record mới trùng với id của 1 record cũ (tổng quát là trùng primary key) thì record cũ sẽ bị thay thế bằng record mới
+
+	
+host:port/smartfarm/cass/updateContext/{id} :
+	update context của record theo id
+	PUT request
+	param:
+		- path param {id}: id của record sẽ bị update
+		- request body param: context mới
+		
+
+host:port/smartfarm/cass//deleteById/{id}
+	delete record trong bảng TB1 theo id
+	DELETE request
+	param {id}: id của record bị delete	
